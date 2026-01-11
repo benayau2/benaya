@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מבוא למערכות מידע וניהול נתונים</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --success: #27ae60;
+      --warning: #f39c12;
+      --info: #9b59b6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Alef', 'Open Sans', Arial, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      color: var(--secondary);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+    }
+
+    nav ul li a:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, transparent 20%, rgba(255,255,255,0.1) 20%, transparent 21%);
+      background-size: 50px 50px;
+      transform: rotate(30deg);
+      animation: animateBG 3s linear infinite;
+    }
+
+    @keyframes animateBG {
+      0% { transform: rotate(30deg) translate(0,0); }
+      100% { transform: rotate(30deg) translate(50px,50px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(231,76,60,0.3);
+    }
+
+    .cta-button:hover {
+      background: #c0392b;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(231,76,60,0.4);
+    }
+
+    /* Section Titles */
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, var(--secondary), var(--accent));
+      margin: 1rem auto;
+      border-radius: 2px;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: white;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .card p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Features Section */
+    .features {
+      background: white;
+      padding: 4rem 0;
+      margin: 4rem 0;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      min-width: 40px;
+    }
+
+    /* Stats Section */
+    .stats {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+    }
+
+    .stat-item p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: right;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e1e8ed;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+
+    .submit-btn {
+      background: var(--secondary);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      text-align: right;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border-radius: 50%;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 2rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 3rem 1rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <i class="fas fa-database"></i>
+        <span>מערכת מידע</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">בית</a></li>
+          <li><a href="#trends">מגמות</a></li>
+          <li><a href="#features">תכונות</a></li>
+          <li><a href="#contact">הרשמה</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <h1>מבוא למערכות מידע וניהול נתונים</h1>
+      <p>היכנסו לעולם המודרני של טכנולוגיית המידע וה数据分析 - קורס מקיף ומתקדם שמכין אתכם לקריירה מובילה בתחום</p>
+      <a href="#contact" class="cta-button">הרשמה לקורס <i class="fas fa-arrow-left"></i></a>
+    </div>
+  </section>
+
+  <!-- Trends Section -->
+  <section class="container" id="trends">
+    <div class="section-title">
+      <h2>המגמות העדכניות בתחום</h2>
+      <p>הכירו את הטכנולוגיות והכלים המובילים בעולם מערכות המידע והנתונים</p>
+    </div>
+    
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <div class="card-icon">
+          <i class="fas fa-cloud"></i>
+        </div>
+        <h3>עננים ושרתים וירטואליים</h3>
+        <p>הכרה בעבודה עם AWS, Azure ו-Google Cloud Platform, ניהול משאבים וירטואליים ופתרונות סקלביליות</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-icon">
+          <i class="fas fa-brain"></i>
+        </div>
+        <h3>AI ו-machine learning</h3>
+        <p>שימוש בבינה מלאכותית לניתוח נתונים, חיזוי מגמות, ואוטומציה של תהליכי מידע</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>אבטחת מידע ו-cyber security</h3>
+        <p>הגנה על נתונים, הצפנה, וניהול זכויות גישה במערכות מידע מודרניות</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h3>IOT ומערכות חכמות</h3>
+        <p>איסוף וניהול מידע ממכשירים חכמים, ערים חכמות, ובקרה מרחוק</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-icon">
+          <i class="fas fa-chart-network"></i>
+        </div>
+        <h3>Big Data & Analytics</h3>
+        <p>ניתוח海量 数据, שימוש ב-Hadoop, Spark, ו-Python לניתוח נתונים מורכבים</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-icon">
+          <i class="fab fa-react"></i>
+        </div>
+        <h3>פיתוח Frontend מודרני</h3>
+        <p>יצירת ממשקים דינמיים עם React, Vue.js, ו-Angular לניהול ותצוגת מידע</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>מה תקבלו בקורס</h2>
+        <p>תוכנית לימודים מקיפה הכוללת את הכלים והידע הנדרשים</p>
+      </div>
+      
+      <div class="feature-list">
+        <div class="feature-item fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div>
+            <h3>הדרכה מקצועית</h3>
+            <p>מתקדמים בתחום ילוו אתכם לאורך כל הקורס</p>
+          </div>
+        </div>
+
+        <div class="feature-item fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div>
+            <h3>פרויקטים מעשיים</h3>
+            <p>בניית פרויקטים אמיתיים שיכינו אתכם לעבודה בשטח</p>
+          </div>
+        </div>
+
+        <div class="feature-item fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div>
+            <h3>תעודה מוכרת</h3>
+            <p>סיום הקורס כולל תעודה מקצועית מוסמכת</p>
+          </div>
+        </div>
+
+        <div class="feature-item fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div>
+            <h3>קהילה פעילה</h3>
+            <p>הצטרפות לקהילת בוגרי הקורס וסטודנטים</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-item fade-in">
+        <h3>95%</h3>
+        <p>שיעור הצלחה ב找工作</p>
+      </div>
+      <div class="stat-item fade-in">
+        <h3>500+</h3>
+        <p>בוגרים since 2020</p>
+      </div>
+      <div class="stat-item fade-in">
+        <h3>12</h3>
+        <p>שעות לימוד أسبوعיות</p>
+      </div>
+      <div class="stat-item fade-in">
+        <h3>3</h3>
+        <p>חודשים של קורס אינטנסיבי</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>הרשמה לקורס</h2>
+        <p>השאירו פרטים ונחזור אליכם בהקדם</p>
+      </div>
+      
+      <div class="contact-form">
+        <form id="registrationForm">
+          <div class="form-group">
+            <label for="name">שם מלא</label>
+            <input type="text" id="name" name="name" required placeholder="הזן את שמך המלא">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">אימייל</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">טלפון</label>
+            <input type="tel" id="phone" name="phone" required placeholder="05X-XXXXXXX">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">הודעה</label>
+            <textarea id="message" name="message" rows="4" placeholder="ספר לנו קצת על עצמך ועל תחומי העניין שלך..."></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">שלח בקשה להרשמה</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>關於 הקורס</h3>
+          <p>קורס מקיף המחבר בין תיאוריה לפרקטיקה בתחום מערכות המידע וניהול נתונים, עם דגש על טכנולוגיות מודרניות ו實際ים.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>קישורים מהירים</h3>
+          <p><a href="#home" style="color: white; text-decoration: none;">דף הבית</a></p>
+          <p><a href="#trends" style="color: white; text-decoration: none;">מגמות</a></p>
+          <p><a href="#features" style="color: white; text-decoration: none;">תכונות הקורס</a></p>
+          <p><a href="#contact" style="color: white; text-decoration: none;">הרשמה</a></p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>שעות פעילות</h3>
+          <p>ראשון - חמישי: 09:00-18:00</p>
+          <p>שישי: 09:00-14:00</p>
+          <p>שבת: סגור</p>
+        </div>
+      </div>
+      
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 מבוא למערכות מידע וניהול נתונים. כל הזכויות שמורות.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Fade-in animation on scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = () => {
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('appear');
+        }
+      });
+    };
+
+    // Initial check
+    window.addEventListener('load', fadeInOnScroll);
+    window.addEventListener('scroll', fadeInOnScroll);
+
+    // Form submission handling
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      // כאן תוכל להוסיף שליחת הנתונים לשרת
+      alert(`תודה ${data.name}! טופס ההרשמה נשלח בהצלחה. נחזור אליך בקרוב.`);
+      
+      // Reset form
+      this.reset();
+    });
+
+    // Add hover effect to cards
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+      });
+    });
+  </script>
+</body>
+</html>
